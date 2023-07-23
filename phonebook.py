@@ -1,5 +1,6 @@
-
 import os
+
+
 def display_phone_book(names, phone_numbers):
 
 
@@ -10,35 +11,34 @@ def display_phone_book(names, phone_numbers):
         i += 1
 
 
-
 def search_phone_book(names, phone_numbers):
     search_name = input('Enter the number you want to search:')
-    for n in search_name:
-        if n == names[0]:
-            print(phone_numbers[0])
-            break
-        elif n == names[1]:
-            print(phone_numbers[1])
-            break
-        elif n == names[2]:
-            print(phone_numbers[2])
-            break
-        else:
-            print(phone_numbers[3])
-            break
+    if search_name in names:
+        name_index = names.index(search_name)
+        print(phone_numbers[name_index])
+    else:
+        print('The name you entered is not in the list')
+
 
 def delete_phone_entry(names, phone_numbers):
-    name = print('Enter the name you want to delete:')
-    i = names.index(name)
-    del names[i]
-    del phone_numbers[i]
+    name = input('Enter the name you want to delete:')
+    if name in names:
+        i = names.index(name)
+        del names[i]
+        del phone_numbers[i]
+        display_phone_book(names,phone_numbers)
+    else:
+        print('The name you entered is not in the list')
+    
     
 
 def add_phone_entry(names, phone_numbers):
     new_name = input('Enter the name you wanted to add:')
     new_num = input('Enter the number: ')
     names.append(new_name)
-    phone_numbers.append(new_num)   
+    phone_numbers.append(new_num)  
+    display_phone_book(names,phone_numbers) 
+
 
 def display_menu():
     os.system('clear')
@@ -49,8 +49,7 @@ def display_menu():
     print('2. Search phone book')
     print('3. delete_phone_entry')
     print('4. add_phone_entry')
-    print('*' * 40)
-    
+    print('*' * 40)    
 
 
 def main():
@@ -58,10 +57,7 @@ def main():
     loop_continue = 'y'
     phone_numbers = ['9746555182','7907784236','0524514507','0565801213']
     
- 
-    
     while  loop_continue == 'y':
-
         display_menu()
         choice = int(input('Choice:1/2/3/4:'))
         
@@ -75,20 +71,8 @@ def main():
             add_phone_entry(names, phone_numbers)
         else:
             break
-
         
         loop_continue = input('Do you want to continue(y/n):')
 
 
-        
-       
-
-
-
-    
-
-
 main()
-
-
-
